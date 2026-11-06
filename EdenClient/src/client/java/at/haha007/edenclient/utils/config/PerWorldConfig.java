@@ -114,6 +114,7 @@ public class PerWorldConfig {
         register(new CubeAreaLoader(), CubeArea.class);
         register(new SphereAreaLoader(), SphereArea.class);
         register(new CylinderAreaLoader(), CylinderArea.class);
+        register(new TorusAreaLoader(), TorusArea.class);
 
     }
 

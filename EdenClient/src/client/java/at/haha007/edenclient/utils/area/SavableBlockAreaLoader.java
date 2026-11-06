@@ -10,6 +10,7 @@ public class SavableBlockAreaLoader implements ConfigLoader<CompoundTag, Savable
     private static final String CUBE_KEY = "cube";
     private static final String CYLINDER_KEY = "cylinder";
     private static final String SPHERE_KEY = "sphere";
+    private static final String TORUS_KEY = "torus";
 
     @NotNull
     @Override
@@ -19,12 +20,14 @@ public class SavableBlockAreaLoader implements ConfigLoader<CompoundTag, Savable
             case CUBE -> CUBE_KEY;
             case CYLINDER -> CYLINDER_KEY;
             case SPHERE -> SPHERE_KEY;
+            case TORUS -> TORUS_KEY;
         };
         tag.putString("type", type);
         ConfigLoader<?, BlockArea> loader = switch (value.getType()) {
             case CUBE -> new CubeAreaLoader().asBlockAreaLoader();
             case CYLINDER -> new CylinderAreaLoader().asBlockAreaLoader();
             case SPHERE -> new SphereAreaLoader().asBlockAreaLoader();
+            case TORUS -> new TorusAreaLoader().asBlockAreaLoader();
         };
         tag.put("value", loader.save(value.getArea()));
         return tag;
@@ -42,6 +45,7 @@ public class SavableBlockAreaLoader implements ConfigLoader<CompoundTag, Savable
             case CUBE_KEY -> new CubeAreaLoader().asBlockAreaLoader();
             case CYLINDER_KEY -> new CylinderAreaLoader().asBlockAreaLoader();
             case SPHERE_KEY -> new SphereAreaLoader().asBlockAreaLoader();
+            case TORUS_KEY -> new TorusAreaLoader().asBlockAreaLoader();
             default -> null;
         };
         if (loader == null) {

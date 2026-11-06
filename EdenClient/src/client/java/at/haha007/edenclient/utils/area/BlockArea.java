@@ -17,10 +17,12 @@ public interface BlockArea {
         ArgumentBuilder<FabricClientCommandSource, ?> cube = CubeArea.command("corner1", "corner2", executor::accept);
         ArgumentBuilder<FabricClientCommandSource, ?> cylinder = CylinderArea.command("bottomCenter", "radius", "height", executor::accept);
         ArgumentBuilder<FabricClientCommandSource, ?> sphere = SphereArea.command("center", "radius", executor::accept);
+        ArgumentBuilder<FabricClientCommandSource, ?> torus = TorusArea.command("center", "majorRadius", "minorRadius", executor::accept);
         cube = CommandManager.literal("cube").then(cube);
         cylinder = CommandManager.literal("cylinder").then(cylinder);
         sphere = CommandManager.literal("sphere").then(sphere);
-        return List.of(cube, cylinder, sphere);
+        torus = CommandManager.literal("torus").then(torus);
+        return List.of(cube, cylinder, sphere, torus);
     }
 
 

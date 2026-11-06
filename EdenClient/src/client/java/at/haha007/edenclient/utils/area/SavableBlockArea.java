@@ -16,6 +16,7 @@ public class SavableBlockArea implements BlockArea {
         if (clazz == CubeArea.class) this.type = BlockAreaType.CUBE;
         else if (clazz == CylinderArea.class) this.type = BlockAreaType.CYLINDER;
         else if (clazz == SphereArea.class) this.type = BlockAreaType.SPHERE;
+        else if (clazz == TorusArea.class) this.type = BlockAreaType.TORUS;
         else throw new IllegalArgumentException("Unknown area type");
         this.area = area;
     }
@@ -59,7 +60,7 @@ public class SavableBlockArea implements BlockArea {
     }
 
     public enum BlockAreaType {
-        CUBE, CYLINDER, SPHERE
+        CUBE, CYLINDER, SPHERE, TORUS
     }
 
     @Override
