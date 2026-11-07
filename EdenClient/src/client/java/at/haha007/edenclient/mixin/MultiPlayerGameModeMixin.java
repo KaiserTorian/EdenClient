@@ -1,6 +1,7 @@
 package at.haha007.edenclient.mixin;
 
 import at.haha007.edenclient.callbacks.PlayerAttackBlockCallback;
+import at.haha007.edenclient.callbacks.PlayerBlockDrestroyedCallback;
 import at.haha007.edenclient.callbacks.PlayerBreakBlockCallback;
 import at.haha007.edenclient.callbacks.PlayerInteractBlockCallback;
 import at.haha007.edenclient.mixinterface.IMultiPlayerGameMode;
@@ -53,6 +54,15 @@ public class MultiPlayerGameModeMixin implements IMultiPlayerGameMode {
         InteractionResult result = PlayerAttackBlockCallback.EVENT.invoker().interact(PlayerUtils.getPlayer(), pos, Direction.UP);
         PlayerBreakBlockCallback.EVENT.invoker().breakBlock(PlayerUtils.getPlayer(), pos, Direction.UP);
         if (result == InteractionResult.FAIL) cir.setReturnValue(false);
+    }
+
+    @Inject(method = "destroyBlock", at = @At("RETURN"))
+    private void onBlockDestroyed(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
+        if(!cir.getReturnValue()) {
+            return;
+        }
+        PlayerBlockDrestroyedCallback.EVENT.invoker().breakBlock(PlayerUtils.getPlayer(), pos, Direction.UP);
+
     }
 
     @Override
